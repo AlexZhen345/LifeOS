@@ -1,0 +1,114 @@
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  --font-size: 16px;
+  
+  /* shadcn/ui 变量 */
+  --background: #ffffff;
+  --foreground: #1a1a1a;
+  --primary: #2d5f3f;
+  --primary-foreground: #ffffff;
+  --muted: #f5f1e8;
+  --muted-foreground: #717182;
+  --accent: #f5f1e8;
+  --accent-foreground: #1a1a1a;
+  --border: rgba(0, 0, 0, 0.1);
+  --input: rgba(0, 0, 0, 0.1);
+  --ring: #2d5f3f;
+  --radius: 0.625rem;
+  
+  /* 温暖自然配色 - 仿照图片 */
+  --color-primary: #1a1a1a;
+  --color-secondary: #4a4a4a;
+  --color-tertiary: #737373;
+  
+  /* 主色调 - 深绿色 */
+  --color-accent: #2d5f3f;
+  --color-accent-light: #3d7a54;
+  --color-accent-dark: #1e4029;
+  
+  /* 金色系 */
+  --color-gold: #f5c344;
+  --color-gold-light: #ffd96b;
+  --color-gold-dark: #d4a832;
+  
+  /* 背景 - 奶油色系 */
+  --color-bg: #fefcf8;
+  --color-bg-secondary: #faf7f0;
+  --color-bg-tertiary: #f5f1e8;
+  --color-bg-card: #fffef9;
+  
+  /* 边框 */
+  --color-border: #e8e3d6;
+  --color-border-light: #f0ebe0;
+  
+  /* 语义颜色 */
+  --color-success: #2d5f3f;
+  --color-success-light: #d4edda;
+  --color-info: #5a7d8c;
+  --color-info-light: #d1e7f0;
+  --color-warning: #f5c344;
+  --color-error: #c94a4a;
+  
+  /* 属性颜色 - 柔和自然 */
+  --color-int: #5a7d8c;
+  --color-vit: #3d7a54;
+  --color-cha: #d88e99;
+  --color-gold: #d4a832;
+  --color-wil: #8b6f9f;
+  
+  /* 间距 */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  
+  /* 圆角 */
+  --radius-sm: 0.375rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  --radius-2xl: 1.25rem;
+  
+  /* 阴影 */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.08);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.08);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-feature-settings: 'liga' 1, 'calt' 1;
+  }
+  
+  html {
+    font-size: var(--font-size);
+  }
+}
