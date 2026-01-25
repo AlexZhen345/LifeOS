@@ -135,7 +135,7 @@ export function DayPlannerModal({ onClose, onSaveSchedule, existingTasks, target
   }, []);
 
   const buildSystemPrompt = () => {
-    const targetDateStr = targetDate.toISOString().split('T')[0];
+    const targetDateStr = formatDate(targetDate);
     const targetDateDisplay = formatDisplayDate(targetDate);
     const currentTime = getCurrentTime();
     const userContext = generateAIContext();
@@ -410,7 +410,7 @@ export function DayPlannerModal({ onClose, onSaveSchedule, existingTasks, target
     if (currentSchedule.length === 0) return;
 
     // 使用目标日期
-    const targetDateStr = targetDate.toISOString().split('T')[0];
+    const targetDateStr = formatDate(targetDate);
     
     // 直接保存日程数据，不创建新任务
     // 日程中 type='task' 的项目如果关联了已有任务，保留 linkedTaskId

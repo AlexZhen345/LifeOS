@@ -49,6 +49,14 @@ const getScheduleStorageKey = (dateStr: string): string => {
   return prefix + dateStr;
 };
 
+// 格式化日期为 YYYY-MM-DD（使用本地时间，避免 toISOString 的时区问题）
+const formatDateToString = (date: Date): string => {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
+};
+
 // 格式化日期显示
 const formatDateDisplay = (date: Date) => {
   const today = new Date();
@@ -122,7 +130,7 @@ export function HomePage({
 
   // 加载选择日期的日程
   useEffect(() => {
-    const dateStr = selectedDate.toISOString().split('T')[0];
+    const dateStr = formatDateToString(selectedDate);
     const storageKey = getScheduleStorageKey(dateStr);
     const savedSchedule = localStorage.getItem(storageKey);
     
@@ -143,7 +151,7 @@ export function HomePage({
     const storageKey = getScheduleStorageKey(targetDate);
     localStorage.setItem(storageKey, JSON.stringify(schedule));
     // 如果保存的是当前选择日期的日程，更新状态
-    const selectedDateStr = selectedDate.toISOString().split('T')[0];
+    const selectedDateStr = formatDateToString(selectedDate);
     if (targetDate === selectedDateStr) {
       setDaySchedule(schedule);
     }
@@ -151,7 +159,7 @@ export function HomePage({
 
   // 清空日程
   const handleClearSchedule = () => {
-    const dateStr = selectedDate.toISOString().split('T')[0];
+    const dateStr = formatDateToString(selectedDate);
     const storageKey = getScheduleStorageKey(dateStr);
     localStorage.removeItem(storageKey);
     setDaySchedule([]);
@@ -182,7 +190,7 @@ export function HomePage({
       item.id === itemId ? { ...item, completed: willBeCompleted } : item
     );
     setDaySchedule(updatedSchedule);
-    const dateStr = selectedDate.toISOString().split('T')[0];
+    const dateStr = formatDateToString(selectedDate);
     const storageKey = getScheduleStorageKey(dateStr);
     localStorage.setItem(storageKey, JSON.stringify(updatedSchedule));
     
@@ -200,7 +208,7 @@ export function HomePage({
   const handleDeleteScheduleItem = (itemId: string) => {
     const updatedSchedule = daySchedule.filter(item => item.id !== itemId);
     setDaySchedule(updatedSchedule);
-    const dateStr = selectedDate.toISOString().split('T')[0];
+    const dateStr = formatDateToString(selectedDate);
     const storageKey = getScheduleStorageKey(dateStr);
     localStorage.setItem(storageKey, JSON.stringify(updatedSchedule));
   };
@@ -220,8 +228,8 @@ export function HomePage({
     }
   };
 
-  const today = new Date().toISOString().split('T')[0];
-  const selectedDateStr = selectedDate.toISOString().split('T')[0];
+  const today = formatDateToString(new Date());
+  const selectedDateStr = formatDateToString(selectedDate);
   const displayTasks = tasks.filter(t => t.scheduledDate === selectedDateStr);
   const isToday = selectedDateStr === today;
   const completedCount = displayTasks.filter((t) => t.completed).length;
@@ -304,7 +312,7 @@ export function HomePage({
         item.linkedTaskId === taskId ? { ...item, completed: newCompleted } : item
       );
       setDaySchedule(updatedSchedule);
-      const dateStr = selectedDate.toISOString().split('T')[0];
+      const dateStr = formatDateToString(selectedDate);
       const storageKey = getScheduleStorageKey(dateStr);
       localStorage.setItem(storageKey, JSON.stringify(updatedSchedule));
     }
@@ -388,7 +396,7 @@ export function HomePage({
           item.id === pendingScheduleItemId ? { ...item, completed: true } : item
         );
         setDaySchedule(updatedSchedule);
-        const dateStr = selectedDate.toISOString().split('T')[0];
+        const dateStr = formatDateToString(selectedDate);
         const storageKey = getScheduleStorageKey(dateStr);
         localStorage.setItem(storageKey, JSON.stringify(updatedSchedule));
       }

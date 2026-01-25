@@ -7,6 +7,14 @@ interface ManualTaskCreationProps {
   onClose: () => void;
 }
 
+// 格式化日期为 YYYY-MM-DD（使用本地时间）
+const formatDateToString = (date: Date): string => {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
+};
+
 const DURATION_OPTIONS = [
   { label: '30 分钟', value: 30 },
   { label: '1 小时', value: 60 },
@@ -19,7 +27,7 @@ export function ManualTaskCreation({ onCreateTasks, onClose }: ManualTaskCreatio
   const [description, setDescription] = useState('');
   const [selectedDuration, setSelectedDuration] = useState(60);
   const [customDuration, setCustomDuration] = useState('');
-  const [scheduledDate, setScheduledDate] = useState(new Date().toISOString().split('T')[0]);
+  const [scheduledDate, setScheduledDate] = useState(formatDateToString(new Date()));
 
   const handleCreate = () => {
     if (!title.trim()) return;
@@ -138,7 +146,7 @@ export function ManualTaskCreation({ onCreateTasks, onClose }: ManualTaskCreatio
               type="date"
               value={scheduledDate}
               onChange={(e) => setScheduledDate(e.target.value)}
-              min={new Date().toISOString().split('T')[0]}
+              min={formatDateToString(new Date())}
               className="w-full px-4 py-3 bg-white border-2 border-[#e8e3d6] rounded-2xl text-[#1a1a1a] focus:outline-none focus:ring-2 focus:ring-[#2d5f3f] focus:border-transparent transition-all"
             />
             <div className="absolute right-4 top-1/2 -translate-y-1/2 text-xs text-[#737373] pointer-events-none">

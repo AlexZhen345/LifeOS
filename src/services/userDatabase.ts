@@ -1,6 +1,14 @@
 // 用户数据库服务 - 使用 localStorage 存储用户信息
 // 支持多账户隔离存储
 
+// 格式化日期为 YYYY-MM-DD（使用本地时间，避免时区问题）
+function formatDateToString(date: Date): string {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
+}
+
 // ==================== 账户管理相关 ====================
 
 // 账户信息
@@ -372,7 +380,7 @@ export function updateTaskCompletion(taskId: string, completed: boolean, actualD
     if (task) {
       task.completed = completed;
       if (completed) {
-        task.completedDate = new Date().toISOString().split('T')[0];
+        task.completedDate = formatDateToString(new Date());
         task.actualDuration = actualDuration;
         userData.stats.totalTasksCompleted += 1;
       }
@@ -425,7 +433,7 @@ function updateStats(userData: UserData): void {
   }
 
   // 更新最后活跃日期
-  stats.lastActiveDate = new Date().toISOString().split('T')[0];
+  stats.lastActiveDate = formatDateToString(new Date());
 }
 
 // 生成 AI 上下文摘要
