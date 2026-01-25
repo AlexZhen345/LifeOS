@@ -1,21 +1,4 @@
 import gradio as gr
-import subprocess
-import os
-
-# 构建前端项目
-def build_frontend():
-    if not os.path.exists('build'):
-        print("Building frontend...")
-        subprocess.run(['npm', 'install'], check=True)
-        subprocess.run(['npm', 'run', 'build'], check=True)
-    else:
-        print("Build directory already exists, skipping build...")
-
-# 尝试构建项目
-try:
-    build_frontend()
-except Exception as e:
-    print(f"Build failed: {e}")
 
 # 使用 Gradio 的静态文件服务
 app = gr.Blocks()
