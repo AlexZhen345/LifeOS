@@ -1,1 +1,1 @@
-# No external dependencies needed - using Python built-in http.server
+gradio>=4.0.0
