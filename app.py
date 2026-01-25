@@ -1,27 +1,16 @@
-import gradio as gr
+import http.server
+import socketserver
+import os
 
-# 使用 Gradio 的静态文件服务
-app = gr.Blocks()
+PORT = 7860
+DIRECTORY = "build"
 
-with app:
-    gr.HTML("""
-    <style>
-        .gradio-container {
-            max-width: 100% !important;
-            padding: 0 !important;
-        }
-        #app-frame {
-            width: 100%;
-            height: 100vh;
-            border: none;
-        }
-    </style>
-    <iframe id="app-frame" src="/file=build/index.html"></iframe>
-    """)
+class Handler(http.server.SimpleHTTPRequestHandler):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, directory=DIRECTORY, **kwargs)
 
 if __name__ == "__main__":
-    app.launch(
-        server_name="0.0.0.0",
-        server_port=7860,
-        allowed_paths=["build"]
-    )
+    os.chdir(os.path.dirname(os.path.abspath(__file__)))
+    with socketserver.TCPServer(("0.0.0.0", PORT), Handler) as httpd:
+        print(f"Serving at http://0.0.0.0:{PORT}")
+        httpd.serve_forever()

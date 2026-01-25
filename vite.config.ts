@@ -52,7 +52,9 @@
     build: {
       target: 'esnext',
       outDir: 'build',
+      assetsDir: 'assets',
     },
+    base: './',
     server: {
       host: '0.0.0.0',
       port: 7860,
