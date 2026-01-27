@@ -1,6 +1,68 @@
+# LifeOS 项目 Git忽略配置
+
+# ========== 通用 ==========
+.DS_Store
+Thumbs.db
+*.log
+*.tmp
+*.temp
+
+# ========== Python ==========
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+.env
+.venv
+ENV/
+pip-log.txt
+.ipynb_checkpoints/
+*.egg-info/
+dist/
+build/
+*.egg
+
+# ========== Node.js ==========
 node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# ========== IDE ==========
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# ========== Vite ==========
+.vite/
+
+# ========== 构建产物 ==========
+frontend/dist/
+backend/build/
+
+# ========== 模型相关 ==========
+model/fine_tuning/checkpoints/
+model/rag/knowledge_base/*.faiss
+model/rag/knowledge_base/*.pkl
+*.pt
+*.pth
+*.bin
+*.safetensors
+
+# ========== 敏感信息 ==========
 .env
 .env.local
-*.log
-.DS_Store
-nul
+.env.*.local
+*.key
+secrets/
+
+# ========== 数据文件 ==========
+*.csv
+*.xlsx
+!model/fine_tuning/datasets/*.csv
