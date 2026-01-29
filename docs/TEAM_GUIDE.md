@@ -1,256 +1,1056 @@
-# 🚀 LifeOS 团队协作指南（小白版）
+# 🚀 LifeOS 团队协作指南（零基础版）
 
-> 本文档帮助团队成员快速上手协作开发，即使你是Git新手也能轻松参与！
+> 本文档专为**编程新手**和**第一次做项目的同学**设计，手把手教你如何参与团队开发！
 
 ---
 
 ## 📋 目录
 
-1. [团队分工](#团队分工)
-2. [环境准备](#环境准备)
-3. [第一次参与项目](#第一次参与项目)
-4. [日常开发流程](#日常开发流程)
-5. [各组工作指南](#各组工作指南)
-6. [跨组对接规范](#跨组对接规范)
-7. [常见问题](#常见问题)
+1. [开始之前：了解项目](#开始之前了解项目)
+2. [团队分工详解](#团队分工详解)
+3. [环境准备（图文教程）](#环境准备图文教程)
+4. [第一次参与项目（超详细）](#第一次参与项目超详细)
+5. [日常开发流程（分步骤）](#日常开发流程分步骤)
+6. [各组工作指南（含实例）](#各组工作指南含实例)
+7. [跨组对接规范](#跨组对接规范)
+8. [常见问题与解决方案](#常见问题与解决方案)
+9. [Git命令速查表](#git命令速查表)
 
 ---
 
-## 👥 团队分工
+## 🎯 开始之前：了解项目
 
-| 角色 | 成员 | 负责目录 | 主要工作 |
-|------|------|---------|---------|
-| **模型组** | 学长 + 1位同学 | `model/` | Prompt设计、RAG、模型微调 |
-| **前端组** | 1位同学 | `frontend/` | 页面UI、交互体验 |
-| **后端组** | 1位同学 | `backend/` + `deploy/` | API开发、部署上线 |
-| **产品指导** | - | `docs/` | 产品方向、体验把关 |
+### LifeOS 是什么？
+
+一个帮助用户规划任务、养成习惯的AI应用，类似"游戏化待办事项+智能教练"。
+
+### 我们要做什么？
+
+把这个想法变成真正能用的Web应用，包括：
+- 漂亮的界面（前端组负责）
+- 后台逻辑（后端组负责）
+- AI智能（模型组负责）
+
+### 为什么要分工？
+
+一个人做太累，分工可以：
+- 专注自己擅长的部分
+- 并行开发提高效率
+- 互相学习不同技能
 
 ---
 
-## 🛠️ 环境准备
+## 👥 团队分工详解
 
-### 1. 安装 Git
+### 整体架构
 
-**Windows**: 下载安装 https://git-scm.com/download/win
-
-安装完成后，打开命令行输入以下命令配置身份：
-```bash
-git config --global user.name "你的名字"
-git config --global user.email "你的邮箱"
+```
+用户浏览器
+    ↓
+【前端界面】 ←→ 【后端API】 ←→ 【AI模型】
+    ↑               ↑              ↑
+  前端组          后端组         模型组
 ```
 
-### 2. 安装开发工具
+### 各组职责详解
 
-| 组别 | 需要安装 |
-|------|---------|
-| **前端组** | [Node.js](https://nodejs.org/) (选LTS版本) |
-| **后端组** | [Python 3.10+](https://www.python.org/downloads/) |
-| **模型组** | [Python 3.10+](https://www.python.org/downloads/) |
+#### 🎨 前端组（1人）
 
-### 3. 推荐编辑器
+**你要做的**：
+- 设计页面长什么样
+- 实现点击、滑动等交互
+- 让界面看起来好看、好用
 
-[VS Code](https://code.visualstudio.com/) - 免费、好用、插件丰富
+**需要的技能**：
+- HTML/CSS（网页基础）
+- JavaScript（让网页动起来）
+- React框架（不会也没事，边做边学）
+
+**日常工作举例**：
+- "今天做登录页面的UI"
+- "优化任务列表的动画效果"
+- "修复移动端显示的bug"
+
+**完全不懂也能做的事**：
+- 调整按钮大小、颜色
+- 修改文字内容
+- 测试页面功能
 
 ---
 
-## 🎬 第一次参与项目
+#### ⚙️ 后端组（1人）
+
+**你要做的**：
+- 提供数据接口（API）
+- 处理业务逻辑（比如任务创建、经验值计算）
+- 部署应用到服务器
+
+**需要的技能**：
+- Python语言
+- FastAPI框架（类似搭积木）
+- 基础服务器知识
+
+**日常工作举例**：
+- "写一个获取用户任务列表的接口"
+- "实现任务完成后的经验值奖励逻辑"
+- "把应用部署到魔搭平台"
+
+**完全不懂也能做的事**：
+- 修改返回的数据内容
+- 调整API参数
+- 运行测试脚本
+
+---
+
+#### 🤖 模型组（2人：学长+1同学）
+
+**你要做的**：
+- 设计AI对话的话术（Prompt）
+- 让AI更懂用户需求（RAG）
+- 训练/微调模型（可选）
+
+**需要的技能**：
+- Python基础
+- 了解大语言模型（不懂也行，学长带）
+- 懂一点机器学习更好（非必须）
+
+**日常工作举例**：
+- "优化任务生成的Prompt，让AI拆解得更合理"
+- "收集100条对话数据用于微调"
+- "测试不同模型的效果对比"
+
+**完全不懂也能做的事**：
+- 修改Prompt模板的文字
+- 收集用户反馈
+- 测试AI回复质量
+
+---
+
+#### 📖 产品指导（1人）
+
+**你要做的**：
+- 确定产品方向和功能优先级
+- 提出用户体验建议
+- 验收各组的工作成果
+
+**需要的技能**：
+- 产品思维（理解用户需求）
+- 沟通协调能力
+- 不需要会编程！
+
+**日常工作举例**：
+- "这周优先做任务创建功能，排行榜放后面"
+- "登录页面的按钮太小了，改大一点"
+- "AI的鼓励话术太机械，要更温暖"
+
+---
+
+### 分工对应表
+
+| 你擅长什么 | 推荐加入 | 原因 |
+|----------|---------|------|
+| 设计、美术、UI | 前端组 | 能发挥审美能力 |
+| 逻辑思维、写代码 | 后端组 | 适合搭建系统架构 |
+| AI、算法、数据 | 模型组 | 玩转大模型很酷 |
+| 产品、用户体验 | 产品指导 | 不用写代码也能贡献 |
+| 我啥都不会 | 任何组都行！ | 边做边学最快 |
+
+---
+
+## 🛠️ 环境准备（图文教程）
+
+> 这一步很重要！环境没装好后面会很麻烦
+
+### Step 1: 安装 Git（所有人必装）
+
+**Git 是什么？**  
+一个代码版本管理工具，类似"多人协作的时光机"，可以：
+- 记录每次代码修改
+- 多人同时工作不冲突
+- 随时回退到之前的版本
+
+**安装步骤（Windows）**：
+
+1. 访问 https://git-scm.com/download/win
+2. 下载后双击安装，**一路默认点"Next"就行**
+3. 安装完成后，按 `Win+R` 输入 `cmd` 打开命令行
+4. 输入 `git --version`，如果显示版本号就成功了
+
+**首次配置（必做）**：
+
+打开命令行，输入以下命令（把名字和邮箱换成你的）：
+
+```bash
+git config --global user.name "张三"
+git config --global user.email "zhangsan@example.com"
+```
+
+> 💡 这个名字会显示在提交记录里，方便队友知道是谁改的代码
+
+---
+
+### Step 2: 安装开发工具
+
+#### 前端组需要装：Node.js
+
+**Node.js 是什么？**  
+运行 JavaScript 代码的环境，前端项目必备。
+
+**安装步骤**：
+1. 访问 https://nodejs.org/
+2. 下载 **LTS 版本**（左边那个，更稳定）
+3. 双击安装，一路默认
+4. 打开命令行输入 `node -v` 和 `npm -v`，有版本号就成功
+
+**常见问题**：
+- 如果显示"不是内部或外部命令"，重启电脑再试
+- 安装太慢可以用国内镜像（问队友要命令）
+
+---
+
+#### 后端组 & 模型组需要装：Python
+
+**Python 是什么？**  
+一种编程语言，后端和AI都要用。
+
+**安装步骤**：
+1. 访问 https://www.python.org/downloads/
+2. 下载 **Python 3.10 或更高版本**
+3. 安装时**一定要勾选** "Add Python to PATH"（非常重要！）
+4. 其他默认，点击安装
+5. 打开命令行输入 `python --version`，有版本号就成功
+
+**Mac用户**：
+```bash
+brew install python@3.10
+```
+
+**常见问题**：
+- 如果忘记勾选PATH，卸载重装
+- 同时装了Python 2和3，用 `python3` 命令
+
+---
+
+### Step 3: 安装代码编辑器（推荐 VS Code）
+
+**为什么用VS Code？**
+- 免费开源
+- 插件丰富
+- 支持所有编程语言
+- 团队都在用，方便互相帮助
+
+**安装步骤**：
+1. 访问 https://code.visualstudio.com/
+2. 下载安装
+3. 安装推荐插件（点击左侧扩展图标搜索）：
+   - **Chinese (Simplified)** - 中文界面
+   - **Git Graph** - 可视化Git历史
+   - **前端组额外装**：ES7+ React/Redux/React-Native snippets
+   - **后端/模型组额外装**：Python
+
+**第一次打开项目**：
+1. 点击 文件 → 打开文件夹
+2. 选择你克隆下来的 `LifeOS` 文件夹
+3. 左侧就能看到所有文件了
+
+---
+
+### 环境检查清单
+
+装完后执行这些命令，全部有版本号才算成功：
+
+```bash
+git --version
+```
+
+**前端组额外检查**：
+```bash
+node -v
+npm -v
+```
+
+**后端/模型组额外检查**：
+```bash
+python --version
+pip --version
+```
+
+全部通过？恭喜你，可以开始干活了！🎉
+
+---
+
+## 🎬 第一次参与项目（超详细）
+
+> 这部分会详细到每一个按键，跟着做就行！
+
+### 前置说明
+
+**什么是"克隆项目"？**  
+就是把GitHub上的代码下载到你电脑上，但比直接下载高级，因为带了完整的版本历史。
+
+**什么是"命令行"？**  
+- Windows：按 `Win+R`，输入 `cmd`，回车
+- Mac：按 `Command+空格`，输入 `terminal`，回车
+
+---
 
 ### Step 1: 克隆项目到本地
 
+**第1步**：打开命令行
+
+**第2步**：用 `cd` 命令进入你想放代码的文件夹
+
+```bash
+# 比如放到桌面
+cd Desktop
+
+# 或者放到D盘的projects文件夹（Windows）
+cd /d D:\projects
+```
+
+> 💡 `cd` 是 "change directory" 的缩写，就是"切换目录"的意思
+
+**第3步**：克隆项目
+
 ```bash
 git clone https://github.com/AlexZhen345/LifeOS.git
+```
+
+执行后会看到一堆下载信息，等它结束就好。
+
+**第4步**：进入项目文件夹
+
+```bash
 cd LifeOS
 ```
 
-### Step 2: 切换到开发分支
+**第5步**：确认下载成功
 
 ```bash
+dir     # Windows用这个
+ls      # Mac/Linux用这个
+```
+
+能看到 `frontend`、`backend`、`model` 等文件夹就对了！
+
+---
+
+### Step 2: 切换到开发分支
+
+**什么是分支？**  
+想象项目是一棵树：
+- `main` 分支：主干，放稳定版本
+- `develop` 分支：开发分支，大家在这里工作
+- `feature/xxx` 分支：每个人的功能分支
+
+```bash
+# 切换到开发分支
 git checkout develop
 ```
 
-> 如果提示 `develop` 不存在，执行：`git checkout -b develop`
-
-### Step 3: 安装依赖
-
-**前端组**：
+如果提示分支不存在，执行：
 ```bash
-cd frontend
-npm install
-npm run dev    # 启动开发服务器，浏览器访问显示的地址
-```
-
-**后端组**：
-```bash
-cd backend
-python -m venv venv
-venv\Scripts\activate    # Windows激活虚拟环境
-pip install -r requirements.txt
-python app.py            # 启动后端服务
-```
-
-**模型组**：
-```bash
-cd model
-python -m venv venv
-venv\Scripts\activate
-pip install -r requirements.txt
+git checkout -b develop
 ```
 
 ---
 
-## 🔄 日常开发流程
+### Step 3: 安装项目依赖
 
-### 完整流程图
+根据你的组别，执行对应命令：
 
-```
-1. 拉取最新代码
-       ↓
-2. 创建功能分支
-       ↓
-3. 写代码 + 测试
-       ↓
-4. 提交到自己的分支
-       ↓
-5. 推送到GitHub
-       ↓
-6. 创建Pull Request
-       ↓
-7. 等待审核合并
-```
-
-### 详细命令
-
-#### 1️⃣ 开始工作前：拉取最新代码
+#### 🎨 前端组
 
 ```bash
+# 进入前端目录
+cd frontend
+
+# 安装依赖（会下载一堆包，等几分钟）
+npm install
+
+# 启动开发服务器
+npm run dev
+```
+
+成功后会显示：
+```
+➜  Local:   http://localhost:7860/app/
+```
+
+打开浏览器访问这个地址，能看到页面就成功了！
+
+**常见错误**：
+- `npm不是内部命令`：Node.js没装好，回去重装
+- `端口被占用`：改一下端口号（问队友）
+
+---
+
+#### ⚙️ 后端组
+
+```bash
+# 进入后端目录
+cd backend
+
+# 创建虚拟环境（隔离Python包，避免冲突）
+python -m venv venv
+
+# 激活虚拟环境
+# Windows:
+venv\Scripts\activate
+
+# Mac/Linux:
+source venv/bin/activate
+
+# 安装依赖
+pip install -r requirements.txt
+
+# 启动后端服务
+python app.py
+```
+
+成功后会显示：
+```
+INFO:     Uvicorn running on http://0.0.0.0:7860
+```
+
+浏览器访问这个地址，能看到欢迎页面就成功了！
+
+**常见错误**：
+- `pip不是内部命令`：Python没装好
+- `ModuleNotFoundError`：依赖没装全，重新 `pip install`
+
+---
+
+#### 🤖 模型组
+
+```bash
+# 进入模型目录
+cd model
+
+# 创建虚拟环境
+python -m venv venv
+
+# 激活虚拟环境（同后端）
+venv\Scripts\activate    # Windows
+source venv/bin/activate # Mac
+
+# 安装依赖
+pip install -r requirements.txt
+
+# 测试Prompt（示例）
+python prompts/task_generation.py
+```
+
+---
+
+### Step 4: 用 VS Code 打开项目
+
+1. 打开 VS Code
+2. 点击 文件 → 打开文件夹
+3. 选择 `LifeOS` 文件夹
+4. 左侧就能看到所有代码了
+
+**推荐设置**：
+- 点击左下角齿轮 → 设置
+- 搜索 `auto save`，选择 `afterDelay`（自动保存）
+
+---
+
+### 恭喜！环境搭建完成 🎉
+
+现在你可以：
+- 修改代码
+- 运行项目
+- 准备开始干活了
+
+---
+
+## 🔄 日常开发流程（分步骤）
+
+> 这是你每天都要做的流程，熟练后3分钟搞定
+
+### 开发流程图解
+
+```
+开始工作
+   ↓
+拉取最新代码 ← 同步队友的更新
+   ↓
+创建功能分支 ← 不在主分支上直接改
+   ↓
+写代码、测试 ← 你的主要工作时间
+   ↓
+提交到本地  ← 保存你的修改
+   ↓
+推送到GitHub ← 让队友看到
+   ↓
+创建PR      ← 请求合并到主分支
+   ↓
+代码审查    ← 队友帮你检查
+   ↓
+合并完成    ← 你的代码进入正式版本
+```
+
+---
+
+### 每天开始工作前（必做！）
+
+**为什么要拉取最新代码？**  
+因为队友可能昨晚改了代码，你要先同步，避免冲突。
+
+```bash
+# 1. 切回开发分支
 git checkout develop
+
+# 2. 拉取最新代码
 git pull origin develop
 ```
 
-#### 2️⃣ 创建你的功能分支
+如果显示 `Already up to date` 就说明没人更新。
 
-命名规范：`feature/组别-功能名`
+---
+
+### 创建你的功能分支
+
+**分支命名规范**：`feature/组别-功能名`
 
 ```bash
 # 前端组示例
 git checkout -b feature/frontend-login-page
 
 # 后端组示例
-git checkout -b feature/backend-task-api
+git checkout -b feature/backend-user-api
 
 # 模型组示例
-git checkout -b feature/model-prompt-v2
+git checkout -b feature/model-prompt-optimize
 ```
 
-#### 3️⃣ 写代码...
+**为什么要这样命名？**  
+- `feature/` 表示这是功能开发
+- `frontend-` 表示是前端组的
+- `login-page` 简短描述做什么
 
-在你负责的目录下工作：
-- 前端组：`frontend/` 目录
-- 后端组：`backend/` 目录
-- 模型组：`model/` 目录
+队友一看就知道这个分支是谁在做什么！
 
-#### 4️⃣ 提交你的更改
+---
+
+### 写代码（这里你最熟悉）
+
+根据你的组别，编辑对应目录的文件：
+- 前端组：`frontend/src/` 下的文件
+- 后端组：`backend/` 下的文件
+- 模型组：`model/` 下的文件
+
+**小技巧**：
+- 保存文件：`Ctrl+S` (VS Code设置自动保存更方便)
+- 频繁测试：边写边看效果
+- 多用搜索：`Ctrl+F` 查找代码
+
+---
+
+### 提交你的更改
+
+#### Step 1: 查看改了哪些文件
 
 ```bash
-# 查看改了哪些文件
 git status
+```
 
+会显示红色的文件名，这些是你修改过的。
+
+#### Step 2: 添加文件到暂存区
+
+```bash
 # 添加所有更改
 git add .
 
-# 提交（写清楚做了什么）
+# 或者只添加特定文件
+git add frontend/src/components/LoginPage.tsx
+```
+
+> 💡 `.` 表示"当前目录下的所有文件"
+
+#### Step 3: 提交并写说明
+
+```bash
 git commit -m "feat(frontend): 完成登录页面UI"
 ```
 
 **提交信息格式**：
+
 ```
 类型(范围): 简短描述
 
-类型：
-- feat: 新功能
-- fix: 修bug
-- docs: 改文档
-- style: 改样式（不影响功能）
-- refactor: 重构代码
+✅ 好的例子：
+feat(frontend): 添加任务列表组件
+fix(backend): 修复用户登录接口bug
+docs: 更新README文档
+style(frontend): 调整按钮样式
 
-范围：frontend / backend / model / docs
+❌ 不好的例子：
+更新
+修改了一些东西
+fix bug
 ```
 
-#### 5️⃣ 推送到GitHub
+**类型说明**：
+- `feat`: 新功能
+- `fix`: 修bug
+- `docs`: 改文档
+- `style`: 改样式（不影响功能）
+- `refactor`: 重构代码
+- `test`: 添加测试
+
+---
+
+### 推送到 GitHub
 
 ```bash
 git push origin feature/frontend-login-page
 ```
 
-#### 6️⃣ 创建 Pull Request (PR)
+这个命令的意思：
+- `push`：推送
+- `origin`：远程仓库（就是GitHub上那个）
+- `feature/frontend-login-page`：你的分支名
 
-1. 打开 https://github.com/AlexZhen345/LifeOS
-2. 点击 "Compare & pull request" 按钮
-3. 填写PR标题和描述
-4. 选择合并到 `develop` 分支
-5. 点击 "Create pull request"
-
-#### 7️⃣ 等待审核
-
-其他同学会review你的代码，有问题会评论，没问题就会合并。
+**第一次推送**会要求登录GitHub，输入账号密码即可。
 
 ---
 
-## 📁 各组工作指南
+### 创建 Pull Request (PR)
 
-### 🎨 前端组
+**什么是PR？**  
+请求把你的代码合并到主分支，让队友审查。
 
-**工作目录**：`frontend/`
+**操作步骤**（网页上）：
 
-**启动开发**：
+1. 打开 https://github.com/AlexZhen345/LifeOS
+2. 会看到黄色提示条：`feature/frontend-login-page had recent pushes`
+3. 点击 **"Compare & pull request"** 按钮
+4. 填写PR信息：
+   ```
+   标题：完成登录页面UI
+   
+   描述：
+   - 实现了用户名/密码输入框
+   - 添加了登录按钮
+   - 响应式适配移动端
+   
+   截图：（可以贴图片）
+   ```
+5. **Base分支选 `develop`**（重要！）
+6. 点击 **"Create pull request"**
+
+---
+
+### 等待代码审查
+
+队友会：
+- 看你的代码
+- 提意见或建议
+- 批准合并
+
+**如果有修改意见**：
+1. 在本地继续改代码
+2. 再次 `git add .` + `git commit` + `git push`
+3. PR会自动更新
+
+**审查通过后**：
+- 队友点击 "Merge pull request"
+- 你的代码进入 `develop` 分支
+- 可以删除你的功能分支了
+
+---
+
+### 完整命令速记（熟练后用）
+
+```bash
+# 每天开始
+git checkout develop
+git pull origin develop
+git checkout -b feature/xxx-xxx
+
+# 写完代码
+git add .
+git commit -m "类型(范围): 说明"
+git push origin feature/xxx-xxx
+
+# 网页创建PR，等待审查
+```
+
+---
+
+## 📁 各组工作指南（含实例）
+
+### 🎨 前端组工作指南
+
+#### 项目结构
+
+```
+frontend/
+├── src/
+│   ├── components/        # 所有组件
+│   │   ├── ui/           # 基础UI组件（按钮、输入框等）
+│   │   ├── WelcomePage.tsx
+│   │   ├── HomePage.tsx
+│   │   └── ...
+│   ├── services/         # API调用封装
+│   ├── styles/           # 全局样式
+│   └── main.tsx          # 入口文件
+├── package.json          # 依赖配置
+└── vite.config.ts        # Vite配置
+```
+
+#### 开发环境启动
+
 ```bash
 cd frontend
 npm run dev
 ```
 
-**常见任务**：
-- 新建页面：在 `src/components/` 下创建 `.tsx` 文件
-- 改样式：使用 TailwindCSS 类名
-- 调API：在 `src/services/` 下封装
+浏览器访问：http://localhost:7860/app/
 
-**注意事项**：
-- 组件用 PascalCase 命名，如 `LoginPage.tsx`
-- 测试时打开浏览器控制台看有没有报错
+#### 常见任务示例
+
+**任务1：修改按钮文字**
+
+1. 在 VS Code 中按 `Ctrl+P`
+2. 输入文件名，比如 `WelcomePage`
+3. 找到按钮代码：
+   ```tsx
+   <Button>开始使用</Button>
+   ```
+4. 改成：
+   ```tsx
+   <Button>立即开始</Button>
+   ```
+5. 保存，浏览器自动刷新，看效果！
+
+**任务2：调整组件样式**
+
+```tsx
+// 找到组件的 className
+<div className="flex items-center gap-4">
+
+// 改成（加大间距）
+<div className="flex items-center gap-8">
+```
+
+**TailwindCSS 速查**：
+- `gap-4`：间距（4 = 16px）
+- `text-lg`：字体大小
+- `bg-blue-500`：背景色
+- `rounded-md`：圆角
+
+**任务3：新建一个页面**
+
+1. 在 `src/components/` 下新建 `MyPage.tsx`
+2. 写基础代码：
+   ```tsx
+   export default function MyPage() {
+     return (
+       <div className="p-4">
+         <h1>我的新页面</h1>
+       </div>
+     )
+   }
+   ```
+3. 在 `App.tsx` 中引入：
+   ```tsx
+   import MyPage from './components/MyPage'
+   ```
+
+#### 调用后端 API
+
+在 `src/services/` 下封装：
+
+```tsx
+// src/services/taskService.ts
+export async function getTasks() {
+  const response = await fetch('/api/v1/tasks')
+  return response.json()
+}
+
+// 在组件中使用
+import { getTasks } from '../services/taskService'
+
+function TaskList() {
+  const [tasks, setTasks] = useState([])
+  
+  useEffect(() => {
+    getTasks().then(data => setTasks(data))
+  }, [])
+  
+  return <div>{/* 渲染任务列表 */}</div>
+}
+```
+
+#### 常见问题
+
+**Q: 改了代码但浏览器没变化？**
+- 检查文件是否保存（VS Code左上角不应有圆点）
+- 刷新浏览器 `Ctrl+F5`
+- 重启开发服务器
+
+**Q: 报错 `Cannot find module`？**
+- 检查import路径是否正确
+- 执行 `npm install` 重装依赖
 
 ---
 
-### ⚙️ 后端组
+### ⚙️ 后端组工作指南
 
-**工作目录**：`backend/`
+#### 项目结构
 
-**启动开发**：
+```
+backend/
+├── api/
+│   ├── routes/           # API路由
+│   │   ├── tasks.py     # 任务相关接口
+│   │   └── users.py     # 用户相关接口
+│   └── schemas/          # 数据模型
+│       └── task.py
+├── core/
+│   ├── game_engine.py    # 游戏逻辑
+│   └── task_manager.py   # 任务管理
+├── app.py                # 入口文件
+└── requirements.txt
+```
+
+#### 开发环境启动
+
 ```bash
 cd backend
+venv\Scripts\activate     # 激活虚拟环境
 python app.py
 ```
 
-**常见任务**：
-- 新建API：在 `api/routes/` 下添加路由
-- 调用模型：在 `core/` 下封装调用逻辑
+#### 常见任务示例
 
-**注意事项**：
-- API路径统一用 `/api/v1/` 前缀
-- 返回格式统一用 JSON
+**任务1：新建一个API接口**
+
+1. 在 `api/routes/` 下新建或编辑文件：
+
+```python
+# api/routes/tasks.py
+from fastapi import APIRouter
+
+router = APIRouter()
+
+@router.get("/tasks")
+async def get_tasks():
+    """获取任务列表"""
+    return {
+        "tasks": [
+            {"id": 1, "title": "学习Git", "completed": False},
+            {"id": 2, "title": "写代码", "completed": True}
+        ]
+    }
+```
+
+2. 在 `app.py` 中注册路由：
+
+```python
+from api.routes import tasks
+
+app.include_router(tasks.router, prefix="/api/v1")
+```
+
+3. 测试：浏览器访问 `http://localhost:7860/api/v1/tasks`
+
+**任务2：定义数据模型**
+
+```python
+# api/schemas/task.py
+from pydantic import BaseModel
+
+class Task(BaseModel):
+    id: int
+    title: str
+    completed: bool
+    reward_exp: int = 10
+```
+
+**任务3：调用模型组的Prompt**
+
+```python
+# 在 core/ 下封装
+from model.prompts.task_generation import get_task_prompt
+
+def generate_tasks_for_user(username: str, goal: str):
+    prompt = get_task_prompt(username, goal, "30分钟")
+    # 调用AI模型（伪代码）
+    result = call_ai_model(prompt)
+    return result
+```
+
+#### API 测试工具
+
+**方法1：浏览器直接访问**（只能测GET请求）
+
+**方法2：使用 Postman 或 Apifox**（推荐）
+- 下载：https://www.postman.com/
+- 创建请求，填URL，点Send
+
+**方法3：用curl命令**
+```bash
+curl http://localhost:7860/api/v1/tasks
+```
+
+#### 常见问题
+
+**Q: 改了代码但接口没变化？**
+- 重启后端服务（`Ctrl+C` 停止，再 `python app.py`）
+- 检查是否在正确的虚拟环境
+
+**Q: 导入模块报错？**
+- 确认虚拟环境已激活
+- 检查 `requirements.txt` 是否包含该包
 
 ---
 
-### 🤖 模型组
+### 🤖 模型组工作指南
 
-**工作目录**：`model/`
+#### 项目结构
 
-**常见任务**：
-- 优化Prompt：编辑 `prompts/` 下的文件
-- 测试效果：写测试脚本验证输出
-- 新增RAG：在 `rag/` 目录开发
+```
+model/
+├── prompts/              # Prompt模板
+│   ├── task_generation.py
+│   └── encouragement.py
+├── rag/                  # RAG检索增强
+│   ├── retriever.py
+│   └── knowledge_base/
+├── fine_tuning/          # 模型微调
+│   ├── datasets/
+│   └── scripts/
+└── config.py             # 模型配置
+```
 
-**注意事项**：
-- Prompt改动后告知后端组
-- 输出格式变化要提前沟通
+#### 常见任务示例
+
+**任务1：优化 Prompt 模板**
+
+```python
+# model/prompts/task_generation.py
+
+# 原始版本
+TASK_GENERATION_PROMPT = """
+你是任务规划助手。
+用户目标：{goal}
+请生成3个任务。
+"""
+
+# 优化后
+TASK_GENERATION_PROMPT = """
+你是一个耐心、专业的任务规划助手，擅长将大目标拆解为可执行的小步骤。
+
+用户信息：
+- 姓名：{username}
+- 目标：{goal}
+- 可用时间：{available_time}
+- 当前等级：{level}
+
+请根据用户的实际情况，生成3-5个**具体、可衡量、有时间限制**的子任务。
+每个任务的难度要适中，让用户能获得成就感。
+
+输出JSON格式：
+{{
+    "tasks": [
+        {{
+            "title": "任务标题",
+            "description": "详细说明",
+            "estimated_time": 30,
+            "difficulty": 3,
+            "reward_exp": 50
+        }}
+    ],
+    "encouragement": "给用户的鼓励话"
+}}
+"""
+```
+
+**任务2：测试 Prompt 效果**
+
+```python
+# 创建测试脚本
+from prompts.task_generation import get_task_prompt
+
+# 测试用例
+test_cases = [
+    {"username": "小明", "goal": "学习Python", "available_time": "每天1小时"},
+    {"username": "小红", "goal": "减肥10斤", "available_time": "每天30分钟"},
+]
+
+for case in test_cases:
+    prompt = get_task_prompt(**case)
+    print(f"\n测试用例：{case['goal']}")
+    print(prompt)
+    print("-" * 50)
+```
+
+**任务3：构建知识库（RAG）**
+
+```python
+# model/rag/knowledge_base/
+
+# 1. 准备文档
+time_management_tips.txt
+habit_formation.txt
+productivity_methods.txt
+
+# 2. 向量化并存储
+from langchain.embeddings import HuggingFaceEmbeddings
+from langchain.vectorstores import FAISS
+
+embeddings = HuggingFaceEmbeddings(model_name="BAAI/bge-small-zh-v1.5")
+vectorstore = FAISS.from_documents(documents, embeddings)
+```
+
+**任务4：对比不同模型效果**
+
+```python
+# 测试不同模型
+models = [
+    "qwen/Qwen2.5-7B-Instruct",
+    "Qwen/Qwen-14B-Chat",
+]
+
+for model_name in models:
+    response = test_model(model_name, prompt)
+    print(f"\n模型：{model_name}")
+    print(f"回复质量评分：{evaluate(response)}")
+```
+
+#### 评估指标
+
+**Prompt效果评估**：
+- 任务是否具体可执行
+- 难度是否合理
+- 语气是否友好
+- 输出格式是否正确
+
+**记录测试结果**：
+```
+测试日期：2026-01-27
+Prompt版本：v2
+测试用例：学习Python
+评分：8/10
+问题：任务时间估计偏长
+改进方向：增加时间约束提示
+```
+
+#### 常见问题
+
+**Q: API Key 在哪配置？**
+- 在 `model/config.py` 中
+- 或者用环境变量（更安全）
+
+**Q: 模型响应太慢怎么办？**
+- 减少 `max_tokens`
+- 换更快的模型
+- 添加缓存机制
 
 ---
 
@@ -297,17 +1097,281 @@ python app.py
 
 ---
 
-## ❓ 常见问题
+别人的代码
+>>>>>>> origin/develop
 
-### Q: git pull 报冲突了怎么办？
+# 3. 手动选择保留哪个（或合并两者），删掉标记
+
+# 4. 保存后
+git add .
+git commit -m "fix: 解决合并冲突"
+```
+
+### Q: 提交错了想撤回怎么办？
 
 ```bash
-# 1. 先看看哪些文件冲突了
-git status
+# 撤回上一次提交（代码改动保留）
+git reset --soft HEAD~1
+```
 
-# 2. 打开冲突文件，会看到类似这样的标记：
+### Q: 想看别人的分支代码？
+
+```bash
+git fetch origin
+git checkout feature/backend-xxx
+```
+
+### Q: npm install 报错？
+
+```bash
+# 删掉 node_modules 重来
+rm -rf node_modules
+npm install
+```
+
+### Q: Python 依赖装不上？
+
+```bash
+# 升级 pip
+python -m pip install --upgrade pip
+
+# 重新安装
+pip install -r requirements.txt
+```
+## ❓ 常见问题与解决方案
+
+### Git 相关
+
+**Q1: git pull 提示冲突了怎么办？**
+
+```bash
+# 会看到类似这样的提示
+CONFLICT (content): Merge conflict in xxx.tsx
+```
+
+**解决步骤**：
+
+1. 打开冲突文件，找到冲突标记：
+```
 <<<<<<< HEAD
 你的代码
+别人的代码
+>>>>>>> origin/develop
+```
+
+2. 手动选择保留哪个（或合并两者）
+3. 删掉 `<<<`, `===`, `>>>` 这些标记
+4. 保存文件后：
+```bash
+git add .
+git commit -m "fix: 解决合并冲突"
+git push
+```
+
+**避免冲突的技巧**：
+- 每天开始前先 `git pull`
+- 频繁提交，小步快跑
+- 不同组改不同文件，自然不会冲突
+
+---
+
+**Q2: 提交错了想撤回怎么办？**
+
+```bash
+# 撤回上一次提交（代码改动保留）
+git reset --soft HEAD~1
+
+# 撤回并丢弃改动（危险！）
+git reset --hard HEAD~1
+```
+
+---
+
+**Q3: 想看别人的分支代码？**
+
+```bash
+# 先拉取所有分支信息
+git fetch origin
+
+# 切换到别人的分支
+git checkout feature/backend-xxx
+
+# 看完切回自己的分支
+git checkout feature/frontend-yyy
+```
+
+---
+
+**Q4: 分支太多，想删除本地分支？**
+
+```bash
+# 查看所有分支
+git branch
+
+# 删除已合并的分支
+git branch -d feature/frontend-old
+
+# 强制删除（没合并也删）
+git branch -D feature/frontend-old
+```
+
+---
+
+### 前端相关
+
+**Q5: npm install 报错？**
+
+```bash
+# 清除缓存重装
+npm cache clean --force
+rm -rf node_modules
+npm install
+```
+
+**Q6: 启动后浏览器一片空白？**
+
+1. 打开浏览器控制台（`F12`）
+2. 看 Console 有没有报错
+3. 常见原因：
+   - 导入路径错误
+   - 语法错误
+   - API接口未启动
+
+---
+
+**Q7: 改了样式但没生效？**
+
+- 检查类名是否拼错
+- 尝试 `Ctrl+F5` 强制刷新
+- 检查是否有CSS优先级问题
+
+---
+
+### 后端相关
+
+**Q8: Python 依赖装不上？**
+
+```bash
+# 方法1：升级pip
+python -m pip install --upgrade pip
+
+# 方法2：换国内源
+pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
+
+# 方法3：单独装失败的包
+pip install 包名 --no-cache-dir
+```
+
+---
+
+**Q9: 虚拟环境激活失败？**
+
+**Windows PowerShell报错**：
+```
+无法加载文件，因为在此系统上禁止运行脚本
+```
+
+解决：
+```powershell
+# 以管理员身份运行PowerShell
+Set-ExecutionPolicy RemoteSigned
+```
+
+或者用 `cmd` 代替PowerShell。
+
+---
+
+**Q10: 改了代码但API没变化？**
+
+- 确认重启了后端服务
+- 检查虚拟环境是否激活
+- 看终端有没有报错
+
+---
+
+### 模型相关
+
+**Q11: API Key 在哪设置？**
+
+1. 复制 `.env.example` 为 `.env`
+2. 编辑 `.env`：
+```
+DASHSCOPE_API_KEY=你的密钥
+```
+3. 重启程序
+
+**注意**：`.env` 文件不要提交到Git！
+
+---
+
+**Q12: 模型响应太慢/超时？**
+
+- 减少 `max_tokens`
+- 增加 `timeout` 时间
+- 换更快的模型
+- 检查网络连接
+
+---
+
+### 协作相关
+
+**Q13: 不知道该做什么？**
+
+1. 看群里的任务分配
+2. 看 GitHub 的 Issues
+3. 问队友有什么需要帮忙的
+
+---
+
+**Q14: 遇到不会的技术问题？**
+
+**推荐解决顺序**：
+1. Google/百度搜错误信息
+2. 看官方文档
+3. 问 AI（ChatGPT/Kimi）
+4. 群里问队友
+5. 问学长
+
+---
+
+**Q15: PR被拒绝了怎么办？**
+
+别灰心！这很正常：
+1. 看审查意见
+2. 按建议修改
+3. 再次提交
+4. 持续改进
+
+代码审查是相互学习的过程，不是挑刺！
+
+---
+
+### 效率提升
+
+**Q16: 有什么好用的工具推荐？**
+
+- **VS Code插件**：
+  - GitLens：可视化Git历史
+  - Todo Tree：标记待办事项
+  - Error Lens：行内显示错误
+  
+- **浏览器插件**：
+  - React DevTools（前端）
+  - JSON Viewer（后端）
+
+- **命令行工具**：
+  - Oh My Zsh（美化终端）
+  - tldr（简化版man手册）
+
+---
+
+**Q17: 感觉效率低怎么办？**
+
+**建议**：
+- 专注一个任务，别多线程
+- 用番茄工作法（25分钟+5分钟休息）
+- 卡住超过30分钟，主动求助
+- 每天总结学到了什么
 =======
 别人的代码
 >>>>>>> origin/develop
@@ -362,4 +1426,103 @@ pip install -r requirements.txt
 
 ---
 
-**祝开发顺利！** 🎉
+## 📋 Git 命令速查表
+
+### 日常高频命令
+
+| 命令 | 作用 | 示例 |
+|------|------|------|
+| `git status` | 查看当前状态 | - |
+| `git add .` | 添加所有修改 | - |
+| `git commit -m "xxx"` | 提交并写说明 | `git commit -m "feat: 添加登录"` |
+| `git push` | 推送到远程 | `git push origin feature/xxx` |
+| `git pull` | 拉取最新代码 | `git pull origin develop` |
+| `git checkout` | 切换分支 | `git checkout develop` |
+| `git branch` | 查看所有分支 | - |
+
+### 分支操作
+
+| 命令 | 作用 |
+|------|------|
+| `git checkout -b xxx` | 创建并切换到新分支 |
+| `git branch -d xxx` | 删除分支 |
+| `git merge xxx` | 合并分支 |
+
+### 查看历史
+
+| 命令 | 作用 |
+|------|------|
+| `git log` | 查看提交历史 |
+| `git log --oneline` | 简洁查看历史 |
+| `git diff` | 查看改动内容 |
+
+### 撤销操作
+
+| 命令 | 作用 |
+|------|------|
+| `git reset HEAD~1` | 撤销上一次提交 |
+| `git checkout -- 文件名` | 丢弃文件的修改 |
+| `git stash` | 暂存当前修改 |
+| `git stash pop` | 恢复暂存的修改 |
+
+---
+
+## 🎓 学习资源推荐
+
+### Git 学习
+
+- **图形化理解Git**：https://learngitbranching.js.org/?locale=zh_CN
+- **廖雪峰Git教程**：https://www.liaoxuefeng.com/wiki/896043488029600
+- **Git速查手册**：https://git-scm.com/docs
+
+### 前端学习
+
+- **React官方文档**：https://react.dev/（英文，有中文翻译）
+- **TailwindCSS文档**：https://tailwindcss.com/docs
+- **现代JavaScript教程**：https://zh.javascript.info/
+
+### 后端学习
+
+- **FastAPI官方文档**：https://fastapi.tiangolo.com/zh/
+- **Python教程**：https://docs.python.org/zh-cn/3/tutorial/
+- **RESTful API设计指南**：搜索即可
+
+### 模型学习
+
+- **Prompt Engineering指南**：https://www.promptingguide.ai/zh
+- **LangChain文档**：https://python.langchain.com/
+- **大模型开发教程**：B站搜"大模型入门"
+
+---
+
+## 💪 给新手的鼓励
+
+### 别怕犯错
+
+- Git可以回退，代码改坏了能恢复
+- 有队友帮你审查，不会出大问题
+- 每个人都是从新手过来的
+
+### 成长路径
+
+```
+第1周：学会基本操作（拉代码、改代码、提交）
+第2周：独立完成小功能
+第1个月：熟悉整个流程，能帮队友解决问题
+第3个月：成为团队骨干
+
+你会发现自己进步很快！
+```
+
+### 记住
+
+- **遇到问题先尝试，卡住了再问**
+- **多看队友的代码，学习最快**
+- **每天进步一点点，坚持就是胜利**
+- **团队协作重于个人能力**
+
+---
+
+**最后，祝你在 LifeOS 项目中学到很多、收获满满！** 🎉🚀
+
+有问题随时群里问，大家一起加油！💪
