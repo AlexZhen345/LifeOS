@@ -1,9 +1,16 @@
-
-  {
-      "name": "User Onboarding Flow",
-      "version": "0.1.0",
-      "private": true,
-      "dependencies": {
+{
+  "name": "lifeos",
+  "version": "0.1.0",
+  "description": "个人任务管理与游戏化成长系统",
+  "private": true,
+  "type": "module",
+  "author": "AlexZhen345",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AlexZhen345/LifeOS.git"
+  },
+  "dependencies": {
           "@radix-ui/react-accordion": "^1.2.3",
           "@radix-ui/react-alert-dialog": "^1.1.6",
           "@radix-ui/react-aspect-ratio": "^1.1.2",
@@ -49,11 +56,18 @@
       },
       "devDependencies": {
           "@types/node": "^20.10.0",
+          "@types/react": "^18.3.1",
+          "@types/react-dom": "^18.3.0",
           "@vitejs/plugin-react-swc": "^3.10.2",
+          "autoprefixer": "^10.4.19",
+          "postcss": "^8.4.38",
+          "tailwindcss": "^3.4.3",
+          "typescript": "^5.4.5",
           "vite": "6.3.5"
       },
       "scripts": {
           "dev": "vite",
-          "build": "vite build"
+          "build": "tsc && vite build",
+          "preview": "vite preview"
       }
   }
