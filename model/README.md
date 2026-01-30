@@ -7,51 +7,25 @@
 
 ```
 model/
-├── prompts/                 # Prompt模板管理
-│   ├── __init__.py
-│   ├── task_generation.py   # 任务生成Prompt
-│   ├── encouragement.py     # 鼓励话术Prompt
-│   └── templates/           # Prompt模板文件
-│
-├── rag/                     # RAG检索增强
-│   ├── __init__.py
-│   ├── retriever.py         # 检索器
-│   ├── embeddings.py        # 向量化
-│   └── knowledge_base/      # 知识库文档
-│       └── README.md
-│
-├── fine_tuning/             # 模型微调
-│   ├── datasets/            # 训练数据集
-│   │   └── README.md
-│   ├── scripts/             # 训练脚本
-│   │   ├── prepare_data.py
-│   │   └── train.py
-│   └── configs/             # 训练配置
-│
-├── evaluation/              # 模型评估
-│   └── metrics.py
-│
-├── config.py                # 模型配置
-├── requirements.txt
-└── README.md
+├── prompts/             # Prompt模板
+│   ├── task_generation.py
+│   └── encouragement.py
+├── rag/                 # RAG检索（可选）
+├── fine_tuning/         # 模型微调（可选）
+├── config.py            # 模型配置
+└── requirements.txt
 ```
 
 ## 核心任务
 
 ### 1. Prompt工程
-- 设计任务生成Prompt
-- 优化AI对话风格
-- A/B测试不同Prompt效果
+编辑 `prompts/task_generation.py`，优化任务生成效果。
 
-### 2. RAG系统
-- 构建领域知识库
-- 优化检索策略
-- 提升回答准确性
+### 2. RAG系统（可选）
+在 `rag/` 下构建知识库，提升回答准确性。
 
-### 3. 模型微调
-- 数据集构建与清洗
-- 选择基座模型
-- 微调训练与评估
+### 3. 模型微调（可选）
+在 `fine_tuning/` 下准备数据集和训练脚本。
 
 ## 快速开始
 
@@ -59,19 +33,18 @@ model/
 # 安装依赖
 pip install -r requirements.txt
 
-# 测试Prompt效果
-python -m prompts.task_generation --test
+# 编辑Prompt模板
+# vim prompts/task_generation.py
 
-# RAG检索测试
-python -m rag.retriever --query "如何制定学习计划"
+# 测试效果（需要后端运行）
+# 后端会自动调用最新的Prompt
 ```
 
 ## 与后端对接
 
-模型服务通过以下方式暴露给后端：
-- 本地调用: 直接import
-- 远程服务: HTTP API（部署后）
+后端在 `backend/core/llm_client.py` 中调用Prompt模板：
+- 编辑 `prompts/` 下的文件
+- 后端会自动使用最新版本
+- 无需手动通知（代码层面自动同步）
 
-## 数据集规范
-
-详见 `fine_tuning/datasets/README.md`
+输出格式变更时需告知后端组。

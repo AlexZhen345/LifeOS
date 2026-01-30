@@ -8,13 +8,11 @@
 ```
 frontend/
 ├── src/
-│   ├── components/     # UI组件
-│   │   ├── ui/        # 基础UI组件 (shadcn/ui)
-│   │   └── figma/     # 业务组件
-│   ├── pages/         # 页面组件
-│   ├── services/      # 前端服务层（API调用）
-│   └── styles/        # 全局样式
-├── index.html
+│   ├── components/      # React组件
+│   ├── services/
+│   │   └── apiService.ts  # **API调用封装**
+│   └── styles/          # 全局样式
+├── .env.example         # 环境变量模板
 ├── package.json
 └── vite.config.ts
 ```
@@ -22,6 +20,10 @@ frontend/
 ## 快速开始
 
 ```bash
+# 配置环境变量
+cp .env.example .env
+# 编辑.env，配置VITE_API_BASE_URL
+
 # 安装依赖
 npm install
 
@@ -32,6 +34,8 @@ npm run dev
 npm run build
 ```
 
+访问：http://localhost:7860/app/
+
 ## 开发规范
 
 1. **组件命名**: PascalCase，如 `TaskCreationModal.tsx`
@@ -41,11 +45,16 @@ npm run build
 
 ## 与后端对接
 
-- API基础路径: `/api/v1/`
-- 开发时使用 Vite 代理配置
+使用 `src/services/apiService.ts` 统一调用后端API：
 
-## 常见任务
+```typescript
+import API from '@/services/apiService';
 
-- [ ] 优化移动端适配
-- [ ] 提升交互动画流畅度
-- [ ] 完善无障碍访问支持
+// 生成任务
+const result = await API.ai.generateTasks('学习Git', '30分钟');
+
+// 完成任务
+await API.task.completeTask('user123', 'task_1');
+```
+
+详见 [docs/API_DOCS.md](../docs/API_DOCS.md)
