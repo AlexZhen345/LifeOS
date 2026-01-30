@@ -2,9 +2,24 @@ import gradio as gr
 from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
+from fastapi.middleware.cors import CORSMiddleware
+from api.routes import ai, tasks
 
 # 创建 FastAPI 应用
-app = FastAPI()
+app = FastAPI(title="LifeOS API", version="1.0.0")
+
+# 配置CORS（允许前端跨域访问）
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+# 注册API路由
+app.include_router(ai.router, prefix="/api/v1", tags=["AI"])
+app.include_router(tasks.router, prefix="/api/v1", tags=["Tasks"])
 
 # 挂载静态文件目录到 /app 路径
 app.mount("/app/assets", StaticFiles(directory="build/assets"), name="assets")
