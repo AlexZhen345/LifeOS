@@ -3,8 +3,13 @@ LLM 客户端封装
 负责调用大语言模型API
 """
 import os
+import sys
 import requests
 from typing import Optional, Dict, Any
+
+# 添加模型模块到路径
+sys.path.append(os.path.join(os.path.dirname(__file__), '../../model'))
+from prompts.task_generation import get_task_prompt
 
 
 class LLMClient:
@@ -46,32 +51,24 @@ class LLMClient:
         except requests.exceptions.RequestException as e:
             return {"error": str(e)}
     
-    def generate_tasks(self, user_goal: str, available_time: str) -> Dict[str, Any]:
+    def generate_tasks(self, user_goal: str, available_time: str, username: str = "用户") -> Dict[str, Any]:
         """
         生成任务列表
         
         Args:
             user_goal: 用户目标
             available_time: 可用时间
+            username: 用户名
             
         Returns:
             生成的任务列表
         """
-        # TODO: 后续由模型组提供Prompt模板
-        # 临时简单版Prompt
-        prompt = f"""
-你是任务规划助手。
-
-用户目标：{user_goal}
-可用时间：{available_time}
-
-请生成3-5个具体可执行的任务，返回JSON格式：
-{{
-    "tasks": [
-        {{"title": "任务标题", "description": "详细说明", "estimated_time": 30, "difficulty": 3}}
-    ]
-}}
-"""
+        # 使用模型组提供的Prompt模板
+        prompt = get_task_prompt(
+            username=username,
+            goal=user_goal,
+            available_time=available_time
+        )
         
         messages = [{"role": "user", "content": prompt}]
         return self.chat(messages)
