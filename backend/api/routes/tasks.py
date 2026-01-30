@@ -3,9 +3,9 @@
 """
 from fastapi import APIRouter, HTTPException
 from typing import Optional
-from backend.core.task_manager import task_manager
-from backend.core.game_engine import GameEngine
-from backend.api.schemas.task import TaskCreate, TaskComplete
+from core.task_manager import task_manager
+from core.game_engine import GameEngine
+from api.schemas.task import TaskCreate, TaskComplete
 
 router = APIRouter()
 

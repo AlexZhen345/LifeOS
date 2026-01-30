@@ -3,7 +3,7 @@
  * 统一管理所有后端API调用
  */
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:7860/api/v1';
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000/api/v1';
 
 /**
  * 通用请求函数

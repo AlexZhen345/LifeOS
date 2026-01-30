@@ -3,7 +3,7 @@ AI相关API接口
 """
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
-from backend.core.llm_client import LLMClient
+from core.llm_client import LLMClient
 
 router = APIRouter()
 llm_client = LLMClient()
